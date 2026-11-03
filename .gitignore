@@ -4,6 +4,3 @@ dist
 *.local
 local/
 .local/
-.gemini/
-.claude/
-

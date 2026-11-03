@@ -9,10 +9,10 @@
 - [x] Соединить все эшелоны сквозными вертикальными магистралями данных (длина холста $5400\text{px}$).
 
 ## Этап 2. Интеграция 5-го направления: «Транспорт и Логистика» (по материалам RoyalCRM) [Завершено]
-- [x] Создан интерактивный компонент [`LogisticsTrackingPreview.jsx`](file:///Users/alex/Projects/commercial/softgreat-ai-landing/src/components/automation-previews/LogisticsTrackingPreview.jsx) с имитацией Telegram/MAX бота трекинга сборных и генеральных грузов, статусов GPS и детекцией простоя на РЦ.
-- [x] В [`AutomationExamples.jsx`](file:///Users/alex/Projects/commercial/softgreat-ai-landing/src/components/AutomationExamples.jsx) добавлен 5-й таб «Логистика и цепочки поставок».
-- [x] В [`solutionsData.js`](file:///Users/alex/Projects/commercial/softgreat-ai-landing/src/data/solutionsData.js) добавлено 5 прикладных кейсов (расчет фрахта за 15 сек через 1С:TMS, 24/7 трекинг-бот, предотвращение срыва окон РЦ, фотоконтроль ТТН из кабины, автоподбор обратных рейсов).
-- [x] В [`SolutionsCatalog.jsx`](file:///Users/alex/Projects/commercial/softgreat-ai-landing/src/components/SolutionsCatalog.jsx) добавлен фильтр «Логистика» с иконкой `Truck`, обновлен заголовок секции: «20 прикладных решений по 5 бизнес-контурам».
+- [x] Создан интерактивный компонент [`LogisticsTrackingPreview.jsx`](src/components/automation-previews/LogisticsTrackingPreview.jsx) с имитацией Telegram/MAX бота трекинга сборных и генеральных грузов, статусов GPS и детекцией простоя на РЦ.
+- [x] В [`AutomationExamples.jsx`](src/components/AutomationExamples.jsx) добавлен 5-й таб «Логистика и цепочки поставок».
+- [x] В [`solutionsData.js`](src/data/solutionsData.js) добавлено 5 прикладных кейсов (расчет фрахта за 15 сек через 1С:TMS, 24/7 трекинг-бот, предотвращение срыва окон РЦ, фотоконтроль ТТН из кабины, автоподбор обратных рейсов).
+- [x] В [`SolutionsCatalog.jsx`](src/components/SolutionsCatalog.jsx) добавлен фильтр «Логистика» с иконкой `Truck`, обновлен заголовок секции: «20 прикладных решений по 5 бизнес-контурам».
 
 ## Этап 3. Настройка параллакса и глубины скролла [Завершено]
 - [x] Установлен `scrollFactor = 0.40`.
