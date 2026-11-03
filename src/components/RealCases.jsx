@@ -241,11 +241,8 @@ export default function RealCases({ activeCase, setActiveCase } = {}) {
               className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-sky-300 transition-all flex flex-col justify-between"
             >
               <div>
-                {/* Номер и бейдж отдела */}
-                <div className="flex items-center justify-between gap-3 mb-3">
-                  <span className="text-sky-600 font-extrabold text-xl tracking-wider font-mono">
-                    {item.number}
-                  </span>
+                {/* Бейдж отдела */}
+                <div className="flex items-center gap-3 mb-3">
                   <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 border border-slate-200/60">
                     {item.badge}
                   </span>
