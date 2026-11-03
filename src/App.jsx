@@ -3,78 +3,68 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import TrustBar from './components/TrustBar';
 import EcosystemLogos from './components/EcosystemLogos';
-import MicroprocessorCanvas from './components/MicroprocessorCanvas';
-import TaglineReveal from './components/TaglineReveal';
-import AutomationExamples from './components/AutomationExamples';
-import SolutionsCatalog from './components/SolutionsCatalog';
+import BusinessBenefits from './components/BusinessBenefits';
+import LinearWorkflow from './components/LinearWorkflow';
+import RealCases from './components/RealCases';
+import GuaranteesAndTerms from './components/GuaranteesAndTerms';
 import ArchitectureFlow from './components/ArchitectureFlow';
 import ProcessAudit from './components/ProcessAudit';
 import TeamAndExpertise from './components/TeamAndExpertise';
-import PricingAndSteps from './components/PricingAndSteps';
 import LeadForm from './components/LeadForm';
 import Footer from './components/Footer';
-import engineerContactImg from './assets/images/engineer_contact.jpg';
+import BusinessProcessBackdrop from './components/BusinessProcessBackdrop';
 
 export default function App() {
   return (
-    <div className="relative min-h-screen bg-[#030508] text-white selection:bg-sky-500/30 selection:text-white">
-      {/* Атмосферная подложка: силуэт программиста за мониторами в глубине всего сайта */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
-        aria-hidden="true"
-      >
-        <div 
-          className="w-full h-full bg-cover bg-center bg-no-repeat opacity-[0.09] filter contrast-125 brightness-70 mix-blend-luminosity"
-          style={{ backgroundImage: `url(${engineerContactImg})` }}
-        />
-        {/* Радиальный и вертикальный градиенты для мягкого рассеивания */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030508] via-transparent to-[#030508]" />
-      </div>
+    <div className="relative min-h-screen bg-white text-slate-900 selection:bg-sky-500/20 selection:text-sky-900">
+      
+      {/* 1. Элегантная светлая подложка с мягкими контурами процессов и геометрической сеткой */}
+      <BusinessProcessBackdrop />
 
-      {/* Живой интерактивный Canvas-фон: печатная плата и микропроцессор */}
-      <MicroprocessorCanvas />
-
-      {/* Плавающая навигация */}
+      {/* 2. Плавающая светлая навигация с контактами Минск/Беларусь */}
       <Header />
 
-      {/* Основной контент */}
+      {/* 3. Основной контент */}
       <main className="relative z-10 flex flex-col">
-        {/* 1. Главный экран (Hero) */}
+        
+        {/* Экран 1: Главный экран (Hero) по эталону Sherpa RPA с карточкой документа в BYN */}
         <Hero />
 
-        {/* 2. Траст-бар со стеком и надежностью */}
+        {/* Траст-бар со стеком и надежностью в светлом стиле */}
         <TrustBar />
 
-        {/* 3. Полоса логотипов поддерживаемых корпоративных экосистем (1С, Битрикс24, Telegram/MAX, МойСклад, PostgreSQL, Python, Docker) */}
+        {/* Поддерживаемые экосистемы (1С, Битрикс24, Telegram, МойСклад, beCloud) */}
         <EcosystemLogos />
 
-        {/* 4. Манифест надёжности (Tagline Reveal) */}
-        <TaglineReveal />
+        {/* Блок 2: Что получает бизнес (4 спокойные карточки: оцифровка, контроль цен, 1С, закрытый контур) */}
+        <BusinessBenefits />
 
-        {/* 5. Примеры автоматизации (4 специализированных интерактивных интерфейса) */}
-        <AutomationExamples />
+        {/* Блок 3: Линейный процесс: Вход ➔ Сверка ➔ Выход + 3 метрики сходимости */}
+        <LinearWorkflow />
 
-        {/* 6. Каталог 15 прикладных решений по 4 контурам с графическими мини-модулями */}
-        <SolutionsCatalog />
+        {/* Блок 4: Реальные кейсы (HoReCa/Салатория, Светотехника/Прайсы, Металлообработка, AI Vision) */}
+        <RealCases />
 
-        {/* 7. Наглядная архитектурная схема бесшовного подключения в 4 шага */}
+        {/* Блок 5: Условия работы и гарантии (Вместо тарифов: смета без наценок, пилот до договора, 60 дней) */}
+        <GuaranteesAndTerms />
+
+        {/* Архитектурный контур бесшовного подключения */}
         <ArchitectureFlow />
 
-        {/* 8. Предпроектное обследование и диагностика точек потерь */}
+        {/* Предпроектное обследование и аудит точек потерь */}
         <ProcessAudit />
 
-        {/* 9. Опыт команды и гарантии */}
+        {/* Опыт команды и инженерные стандарты */}
         <TeamAndExpertise />
 
-        {/* 10. 4 шага запуска и прозрачные цены */}
-        <PricingAndSteps />
-
-        {/* 11. Финальная форма захвата (Техническая консультация) */}
+        {/* Блок 6: Финальная форма захвата (Заявка на бесплатный аудит) */}
         <LeadForm />
+        
       </main>
 
-      {/* Подвал */}
+      {/* Подвал с реквизитами, контактами и законом № 99-З РБ */}
       <Footer />
+
     </div>
   );
 }

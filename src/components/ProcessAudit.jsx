@@ -1,115 +1,101 @@
 import React from 'react';
-import { ArrowRight, BarChart3, Clock, Compass, Shield, Zap, CheckCircle2 } from 'lucide-react';
+import { Compass, BarChart3, Clock, ShieldCheck, ArrowRight, Zap, Check } from 'lucide-react';
 
 export default function ProcessAudit() {
   const deliverables = [
     {
-      icon: <Compass className="w-5 h-5 text-sky-400" />,
-      title: 'Карта узких мест',
-      desc: 'Наглядная схема операций, где ваши сотрудники тратят больше всего оплачиваемого времени на ручной ввод и сверку в 1С и Excel.'
+      icon: Compass,
+      title: 'Карта точек потерь времени',
+      desc: 'Наглядная фиксация операций, где сотрудники тратят до 70% рабочего дня на ручной ввод и перепроверку данных в 1С и таблицах.',
+      accent: 'text-sky-600 bg-sky-50 border-sky-200'
     },
     {
-      icon: <BarChart3 className="w-5 h-5 text-emerald-400" />,
-      title: 'Расчёт окупаемости в рублях',
-      desc: 'Прозрачный финансовый прогноз до старта проекта: сколько компания сэкономит и заработает при автоматизации каждого участка.'
+      icon: BarChart3,
+      title: 'Финансовый расчет окупаемости',
+      desc: 'Понятный расчет в белорусских рублях (BYN): сколько компания сэкономит за счет исключения переплат поставщикам и рутинных часов.',
+      accent: 'text-emerald-600 bg-emerald-50 border-emerald-200'
     },
     {
-      icon: <Clock className="w-5 h-5 text-amber-400" />,
-      title: 'План быстрых побед (Quick Wins)',
-      desc: 'Выделяем 1–2 процесса, которые можно автоматизировать за первые 10–14 дней с минимальным бюджетом для моментального эффекта.'
+      icon: Clock,
+      title: 'План быстрого запуска (14 дней)',
+      desc: 'Выделяем один ключевой участок с максимальной отдачей, который можно оцифровать и запустить за первые 2 недели.',
+      accent: 'text-amber-600 bg-amber-50 border-amber-200'
     },
     {
-      icon: <Shield className="w-5 h-5 text-indigo-400" />,
-      title: 'Выбор контура безопасности',
-      desc: 'Внутренний закрытый контур (On-Premise) для конфиденциальных данных компании или быстрый гибридный контур с автоматической анонимизацией данных.'
+      icon: ShieldCheck,
+      title: 'Рекомендации по контуру безопасности',
+      desc: 'Определяем необходимость изоляции данных: On-Premise внутри периметра компании или локальный белорусский хостинг.',
+      accent: 'text-indigo-600 bg-indigo-50 border-indigo-200'
     }
   ];
 
   return (
-    <section id="diagnostics" className="py-24 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto border-t border-white/[0.08] relative z-10">
-      <div className="p-8 sm:p-12 md:p-16 rounded-3xl bg-[#0c1017] border border-white/10 relative overflow-hidden">
-        {/* Фоновое свечение */}
-        <div 
-          className="absolute -top-24 -right-24 w-96 h-96 bg-sky-500/[0.03] rounded-full blur-[100px] pointer-events-none"
-          aria-hidden="true"
-        />
-
+    <section id="diagnostics" className="py-20 md:py-28 px-4 sm:px-6 max-w-7xl mx-auto border-t border-slate-200/80">
+      <div className="p-8 sm:p-12 md:p-14 rounded-3xl bg-slate-50/70 border border-slate-200 shadow-sm relative">
+        
+        {/* Заголовок */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-xs font-mono text-zinc-300 uppercase tracking-wider mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-xs font-semibold text-slate-700 uppercase tracking-wider mb-4 shadow-sm">
             Предпроектное обследование
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
-            Диагностика процессов и точек потерь: считаем окупаемость до старта разработки
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-4">
+            Бесплатный аудит процесса: находим узкие места до старта разработки
           </h2>
-          <p className="text-base text-zinc-400 font-normal leading-relaxed font-sans">
-            Инженеры-практики с реальным опытом внедрения 1С, Битрикс24 и прикладных ИИ-пайплайнов разбирают рутину ваших отделов, находят скрытые потери времени и формируют пошаговую дорожную карту.
+          <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
+            Инженеры-практики с реальным опытом внедрения 1С и Битрикс24 подключаются к 30-минутному онлайн-разбору, анализируют структуру входящих документов и показывают расчет эффекта.
           </p>
         </div>
 
-        {/* Сетка 4 артефактов */}
+        {/* 4 карточки результатов аудита */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {deliverables.map((item, idx) => (
-            <div 
-              key={idx}
-              className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex flex-col justify-between hover:border-white/20 transition-all duration-200"
-            >
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4">
-                  {item.icon}
+          {deliverables.map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={idx}
+                className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between"
+              >
+                <div>
+                  <div className={`w-10 h-10 rounded-xl border flex items-center justify-center mb-4 ${item.accent}`}>
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-base font-bold text-slate-900 mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                    {item.desc}
+                  </p>
                 </div>
-                <h3 className="text-base font-bold text-white mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-zinc-400 leading-relaxed font-sans">
-                  {item.desc}
-                </p>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Оцифрованные результаты внедрения на этапе пилота */}
-        <div className="mb-12 p-6 rounded-2xl bg-gradient-to-r from-sky-950/30 via-emerald-950/20 to-amber-950/20 border border-white/10">
-          <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-4 flex items-center gap-2">
-            <Zap className="w-4 h-4 text-amber-400" />
-            Оцифрованные результаты, которые мы фиксируем на этапе пилота:
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="flex items-start gap-3">
-              <span className="text-2xl font-mono font-extrabold text-emerald-400 shrink-0">20 сек</span>
-              <div className="text-xs text-zinc-300 leading-relaxed font-sans">
-                Разбор входящей накладной УПД со штампом и автоматическое создание документа в 1С без ручного ввода.
-              </div>
+        {/* Фиксация результатов пилота */}
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
+              <Zap className="w-6 h-6" />
             </div>
-            <div className="flex items-start gap-3">
-              <span className="text-2xl font-mono font-extrabold text-sky-400 shrink-0">24/7</span>
-              <div className="text-xs text-zinc-300 leading-relaxed font-sans">
-                Ночная квалификация лидов в Telegram, онлайн-проверка остатков в 1С и создание сделки в Битрикс24.
+            <div>
+              <div className="text-sm font-bold text-slate-900">
+                Пилотный прототип на ваших накладных до заключения договора
               </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <span className="text-2xl font-mono font-extrabold text-amber-400 shrink-0">8 мин</span>
-              <div className="text-xs text-zinc-300 leading-relaxed font-sans">
-                Авто-расценка строительной или производственной сметы на 300 строк по 5 поставщикам вместо 2 дней.
+              <div className="text-xs text-slate-500 mt-0.5">
+                Вы передаете 3–5 обезличенных типовых накладных и видите реальное время и точность авто-ввода в 1С.
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Кнопка записи */}
-        <div className="flex flex-col sm:flex-row items-center gap-5">
           <a
             href="#lead-form"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl text-sm font-semibold bg-white text-black hover:bg-zinc-200 transition-all duration-300 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-sky-600 text-white hover:bg-sky-700 shadow-sm shrink-0 transition-all"
           >
-            <span>Заказать консультацию</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>Заказать аудит</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </a>
-          <span className="text-xs text-zinc-400 font-sans max-w-xl">
-            Бесплатная 30-минутная онлайн-консультация: разбираем 1 конкретный процесс, показываем работающую систему и даем честный расчет сроков и бюджета.
-          </span>
         </div>
+
       </div>
     </section>
   );

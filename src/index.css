@@ -4,13 +4,13 @@
 
 @layer base {
   html {
-    color-scheme: dark;
-    background-color: #000000;
+    color-scheme: light;
+    background-color: #FFFFFF;
   }
   
   body {
-    background-color: #000000;
-    color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #0F172A;
     font-family: 'Manrope', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -22,20 +22,20 @@
   }
 }
 
-/* Кастомный тонкий скроллбар */
+/* Тонкий светлый скроллбар */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #F8FAFC;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(15, 23, 42, 0.15);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(15, 23, 42, 0.25);
 }
 
 /* Вспомогательные классы */
