@@ -1,198 +1,315 @@
 import React, { useState } from 'react';
-import { 
-  UtensilsCrossed, 
-  Lightbulb, 
-  Factory, 
-  Camera, 
-  ArrowRight, 
-  CheckCircle2, 
-  Clock, 
-  MessageSquare,
-  FileSpreadsheet,
-  Zap,
-  TrendingUp
-} from 'lucide-react';
+import { ArrowDown, ArrowRight, ExternalLink } from 'lucide-react';
 
-export default function RealCases() {
-  const [activeCase, setActiveCase] = useState(0);
+export default function RealCases({ activeCase, setActiveCase } = {}) {
+  const [activeCategory, setActiveCategory] = useState('Продажи и КП');
 
-  const cases = [
+  const categories = [
+    'Продажи и КП',
+    'Бухгалтерия и закупки',
+    'Сервис и производство',
+    'Руководство и HR'
+  ];
+
+  const casesData = [
+    // Отдел 1: Продажи и КП
     {
-      id: 'horeca',
-      icon: UtensilsCrossed,
-      title: 'Оптовые поставки и HoReCa (Продукты питания / Салатная продукция)',
-      shortTitle: 'HoReCa и продукты',
-      problemTitle: 'Сложность рутины:',
-      problem: 'Рестораны и кулинарные сети сбрасывают заказы поздно вечером в Telegram (голосовыми сообщениями, неровными списками). Операторы тратят до 3 часов ночи на перебивку позиций в 1С.',
-      solutionTitle: 'Решение и сходимость:',
-      solution: 'Telegram-ассистент распознает голосовые сообщения поваров, сопоставляет номенклатуру (салаты, полуфабрикаты, фасовку), мгновенно создает заказ в 1С/Битрикс24 и формирует производственный лист к 06:00 утра для утренней смены цеха.',
-      resultMetrics: [
-        { label: 'Скорость формирования листа', value: 'к 06:00', note: 'Без ночного дежурства оператора' },
-        { label: 'Ошибки в фасовке', value: '0 сбоев', note: 'Авто-сверка с матрицей клиента' },
-        { label: 'Экономия фонда оплаты', value: '2.5 ставки', note: 'Перераспределение на контроль качества' }
-      ],
-      badge: 'Кейс: HoReCa Беларусь'
+      id: '01',
+      number: '01',
+      department: 'Продажи и КП',
+      badge: 'Продажи и КП',
+      title: 'Прием заявок, общение в чатах и сборка КП',
+      description: 'Принимает заказы из почты, звонков и мессенджеров (даже если клиент написал список своими словами или наговорил голосом), ведет диалог для уточнения деталей, проверяет остатки и собирает готовое КП или счет.',
+      flow: {
+        input: 'Заявка / Чат / Голос',
+        action: 'Диалог и подбор из базы',
+        output: 'Готовое КП в Битрикс24 и 1С'
+      }
     },
     {
-      id: 'lighting',
-      icon: Lightbulb,
-      title: 'Торговля и дистрибуция (Светотехника, кабель, комплектующие)',
-      shortTitle: 'Дистрибуция и кабель',
-      problemTitle: 'Сложность рутины:',
-      problem: 'Каждый поставщик присылает прайс-листы в своем формате Excel с разными наименованиями одного и того же светильника или кабеля. Подготовка коммерческого предложения на 50 позиций занимала у менеджера до 2 дней.',
-      solutionTitle: 'Решение и сходимость:',
-      solution: 'Сведение разнородных прайс-листов от десятков поставщиков в единую аналитическую таблицу. Автоматический расчет лучшей цены закупки с учетом скидок и подготовка КП клиенту с маржой за 2 минуты.',
-      resultMetrics: [
-        { label: 'Подготовка КП клиенту', value: '2 минуты', note: 'Вместо 2 рабочих дней' },
-        { label: 'Сверка цен поставщиков', value: '100%', note: 'Опрос 12 прайс-листов параллельно' },
-        { label: 'Рост конверсии в сделку', value: '+28%', note: 'Клиент получает расчёт первым' }
-      ],
-      badge: 'Кейс: Оптовая дистрибуция'
+      id: '02',
+      number: '02',
+      department: 'Продажи и КП',
+      badge: 'Продажи и КП',
+      title: 'Подбор изделия и комплектующих по фотографии',
+      description: 'Клиент или менеджер присылает обычное фото изделия со смартфона (например, подбор подходящей крышки-сиденья под форму сантехники или запчасти к оборудованию). Система по геометрии и крепежу находит совместимые модели в каталоге.',
+      flow: {
+        input: 'Фото изделия от клиента',
+        action: 'Анализ формы и размеров',
+        output: 'Точный артикул из каталога'
+      },
+      demoLink: 'https://podbor-kryshek.apps.aipush.dev'
     },
     {
-      id: 'production',
-      icon: Factory,
-      title: 'Производство и металлообработка (Учёт машинного времени и стадий)',
-      shortTitle: 'Металлообработка и станки',
-      problemTitle: 'Сложность рутины:',
-      problem: 'Непрозрачный расчет себестоимости нестандартных изделий: технологи вручную оценивали нормативное время резки, гибки и сварки, а фактические простои станков оставались вне учета.',
-      solutionTitle: 'Решение и сходимость:',
-      solution: 'При входящей заявке система рассчитывает нормативное время оборудования по параметрам чертежа, создает технологическую карту изделия в учетной системе и отслеживает узкие места по цепочке в цеху.',
-      resultMetrics: [
-        { label: 'Точность расчёта смены', value: '98%', note: 'Сходимость с реальным временем ЧПУ' },
-        { label: 'Выявление простоев', value: '-35%', note: 'Оперативная диспетчеризация' },
-        { label: 'Срок запуска в работу', value: 'В день заказа', note: 'Без задержки на согласование' }
-      ],
-      badge: 'Кейс: Производственный цех'
+      id: '03',
+      number: '03',
+      department: 'Продажи и КП',
+      badge: 'Продажи и КП',
+      title: 'Умные повторные продажи по истории базы',
+      description: 'Анализирует историю отгрузок и старые комментарии менеджеров в CRM: вычисляет, у кого из клиентов заканчиваются расходники, кому пора предложить плановое ТО или дооснащение, и сразу готовит персональное предложение.',
+      flow: {
+        input: 'История сделок и отгрузок',
+        action: 'Расчет повода для звонка',
+        output: 'Задача и КП менеджеру'
+      }
+    },
+
+    // Отдел 2: Бухгалтерия и закупки
+    {
+      id: '04',
+      number: '01',
+      department: 'Бухгалтерия и закупки',
+      badge: 'Бухгалтерия и закупки',
+      title: 'Ввод первички, ТТН и сверка счетов с договором',
+      description: 'Распознает сканы и PDF счетов, накладных и актов аренды, сопоставляет заводские артикулы поставщиков с номенклатурой в 1С и проверяет цены по договору. Бухгалтер видит только расхождения.',
+      flow: {
+        input: 'Скан счета / ТТН / Акт',
+        action: 'Сверка цен с договором',
+        output: 'Проводка в Битрикс24 и 1С'
+      }
     },
     {
-      id: 'vision',
-      icon: Camera,
-      title: 'Компьютерное зрение (AI Vision) на контроле выпуска продукции',
-      shortTitle: 'AI Vision контроль',
-      problemTitle: 'Сложность рутины:',
-      problem: 'Человеческий фактор при комплектации отгрузочных лотков и коробок: пересортица, недовложения или отправка бракованной единицы приводили к штрафам от торговых сетей.',
-      solutionTitle: 'Решение и сходимость:',
-      solution: 'Камера на выходе с упаковочной линии регистрирует готовые изделия или лотки, сверяет визуальное соответствие заказу и автоматически обновляет фактический статус отгрузки в учетной системе.',
-      resultMetrics: [
-        { label: 'Исключение пересортицы', value: '100%', note: 'Защита от отправки не того артикула' },
-        { label: 'Время фиксации места', value: '0.4 сек', note: 'Кадр лотка на роликовом конвейере' },
-        { label: 'Штрафы от сетей', value: '0 BYN', note: 'Фотофиксация каждой партии' }
-      ],
-      badge: 'Кейс: Контроль качества'
+      id: '05',
+      number: '02',
+      department: 'Бухгалтерия и закупки',
+      badge: 'Бухгалтерия и закупки',
+      title: 'Сведение прайсов поставщиков и контроль цен',
+      description: 'Поставщики присылают прайс-листы и спецификации в разных форматах (Excel, PDF, таблицы). Система сводит их в единую матрицу закупок, находит лучшие условия и сигнализирует о скрытом удорожании позиций.',
+      flow: {
+        input: 'Прайсы разных поставщиков',
+        action: 'Сводная матрица цен',
+        output: 'Сигнал об отклонениях'
+      }
+    },
+    {
+      id: '06',
+      number: '03',
+      department: 'Бухгалтерия и закупки',
+      badge: 'Бухгалтерия и закупки',
+      title: 'Автодоговоры по фото реквизитов и проверка макетов',
+      description: 'По фотографии или скану реквизитов клиента система за секунды извлекает УНП, расчетный счет и ФИО руководителя, проверяет контрагента по базе, заводит карточку в CRM и формирует готовый договор со счетом.',
+      flow: {
+        input: 'Фото / Скан реквизитов',
+        action: 'Проверка УНП и шаблона',
+        output: 'Готовый договор и счет'
+      }
+    },
+
+    // Отдел 3: Сервис и производство
+    {
+      id: '07',
+      number: '01',
+      department: 'Сервис и производство',
+      badge: 'Сервис и производство',
+      title: 'Расчет точной даты готовности заказа в цеху',
+      description: 'По нажатию кнопки в карточке заказа система анализирует текущую очередь изделий на всех участках цеха (резка, гибка, сборка), учитывает реальную статистику прошлых партий и сразу называет честный срок готовности для клиента.',
+      flow: {
+        input: 'Текущая очередь в цеху',
+        action: 'Расчет загрузки участков',
+        output: 'Точная дата готовности клиенту'
+      }
+    },
+    {
+      id: '08',
+      number: '02',
+      department: 'Сервис и производство',
+      badge: 'Сервис и производство',
+      title: 'Фотоконтроль LCD-панелей, выкладки и отгрузки',
+      description: 'Техники, мерчандайзеры или рабочие цеха скидывают в бот фото рекламных LCD-экранов в бизнес-центрах, выкладки товара на полках или готового оборудования перед отгрузкой. Система проверяет кадры по чек-листу и сама верстает отчет.',
+      flow: {
+        input: 'Фото экрана / Полки / Груза',
+        action: 'Проверка качества и макета',
+        output: 'Готовый PDF-отчет клиенту'
+      }
+    },
+    {
+      id: '09',
+      number: '03',
+      department: 'Сервис и производство',
+      badge: 'Сервис и производство',
+      title: 'Сервисный бот по QR-коду и диагностика поломок',
+      description: 'Сотрудник на объекте наводит телефон на QR-код оборудования и фотографирует ошибку на дисплее. Бот выдает пошаговую инструкцию для устранения мелкой проблемы на месте, а при сложной поломке вызывает инженера со списком нужных запчастей.',
+      flow: {
+        input: 'Скан QR и фото ошибки',
+        action: 'Инструкция самодиагностики',
+        output: 'Наряд инженеру и список ЗиП'
+      }
+    },
+
+    // Отдел 4: Руководство и HR
+    {
+      id: '10',
+      number: '01',
+      department: 'Руководство и HR',
+      badge: 'Руководство и HR',
+      title: 'Утренние сводки директору и контроль просрочек',
+      description: 'Каждое утро руководитель получает в мессенджер наглядную картину бизнеса: выручка и оплаты, статус каждого заказа в производстве и продажах, кто идет в графике, а на каком участке возникла задержка с указанием причины.',
+      flow: {
+        input: 'Данные Б24, 1С и цеха',
+        action: 'Анализ плана и отклонений',
+        output: 'Утренняя сводка директору'
+      }
+    },
+    {
+      id: '11',
+      number: '02',
+      department: 'Руководство и HR',
+      badge: 'Руководство и HR',
+      title: 'ИИ-рекрутер: разбор резюме и диалог с кандидатами',
+      description: 'Агент за секунды отбирает подходящие резюме под требования вакансии, а бот самостоятельно пишет кандидату в мессенджер 24/7: ведет вежливую переписку, уточняет опыт, зарплатные ожидания и записывает лучших на интервью.',
+      flow: {
+        input: 'Отклик и резюме кандидата',
+        action: 'Скрининг и переписка в боте',
+        output: 'Готовая анкета и запись в CRM'
+      }
+    },
+    {
+      id: '12',
+      number: '03',
+      department: 'Руководство и HR',
+      badge: 'Руководство и HR',
+      title: 'Корпоративная база знаний и обучение новых сотрудников',
+      description: 'Новый сотрудник задает рабочий вопрос обычным языком в чате: как провести возврат, какой регламент приемки или допуск по техкарте. Ассистент мгновенно отвечает по внутренним правилам компании.',
+      flow: {
+        input: 'Вопрос сотрудника в чате',
+        action: 'Поиск по техкартам и правилам',
+        output: 'Точная инструкция за секунды'
+      }
     }
   ];
 
-  const current = cases[activeCase];
+  const filteredCases = casesData.filter((c) => c.department === activeCategory);
 
   return (
-    <section id="cases" className="py-20 md:py-28 px-4 sm:px-6 max-w-7xl mx-auto border-t border-slate-200/80">
-      
-      {/* Заголовок */}
-      <div className="max-w-3xl mx-auto text-center mb-12">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 uppercase tracking-wider mb-4">
-          Опыт внедрения в Беларуси
-        </div>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
-          Реальные кейсы: оптимизация и сходимость аналитики
-        </h2>
-        <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed">
-          Практические сценарии, где внедрение устранило задержки, исключило ошибки и высвободило сотни рабочих часов.
-        </p>
-      </div>
-
-      {/* Табы выбора кейса */}
-      <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
-        {cases.map((c, idx) => {
-          const Icon = c.icon;
-          const isActive = activeCase === idx;
-          return (
-            <button
-              key={c.id}
-              onClick={() => setActiveCase(idx)}
-              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
-                isActive
-                  ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20'
-                  : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
-              }`}
-            >
-              <Icon className="w-4 h-4" />
-              <span>{c.shortTitle}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Карточка развернутого кейса */}
-      <div className="rounded-3xl bg-white border border-slate-200/90 shadow-xl overflow-hidden">
+    <section id="cases" className="py-20 md:py-28 bg-white border-b border-slate-200/80 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 text-left">
         
-        {/* Шапка кейса */}
-        <div className="p-6 sm:p-8 bg-slate-50/80 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex items-start gap-4">
-            <div className="p-3 rounded-2xl bg-white border border-slate-200 text-sky-600 shadow-sm shrink-0">
-              <current.icon className="w-6 h-6" />
+        {/* Верхняя часть секции: двухколоночная сетка */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12">
+          {/* Левая колонка (7 колонок) */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
+            <span className="text-sky-800 bg-sky-50 border border-sky-200 px-3 py-1 rounded-full text-xs font-semibold inline-block mb-3">
+              Примеры задач по отделам
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+              Примеры задач для автоматизации по отделам
+            </h2>
+            <p className="text-slate-600 text-base leading-relaxed mb-6">
+              Конкретные участки работы, где рутинные действия заменяются программными ассистентами с прямой передачей данных в Битрикс24, 1С и учетные базы компании.
+            </p>
+            
+            {/* Фильтр по отделам под текстом */}
+            <div className="flex flex-wrap items-center gap-2">
+              {categories.map((cat) => {
+                const isActive = activeCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-150 cursor-pointer ${
+                      isActive
+                        ? 'bg-sky-600 text-white shadow-sm shadow-sky-600/20'
+                        : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
             </div>
-            <div>
-              <span className="text-xs font-bold text-sky-700 bg-sky-100/70 px-2.5 py-0.5 rounded-md inline-block mb-1.5">
-                {current.badge}
-              </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
-                {current.title}
-              </h3>
+          </div>
+
+          {/* Правая колонка (5 колонок) - компактный прямоугольник без обрезки */}
+          <div className="lg:col-span-5">
+            <div className="rounded-2xl border border-slate-200 overflow-hidden shadow-md bg-sky-600 p-1.5">
+              <img
+                src="/images/hero-ai-automation.png"
+                alt="Сквозной конвейер автоматизации бизнес-процессов"
+                className="w-full h-auto rounded-xl object-contain block"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>
 
-        {/* Тело кейса: До vs После */}
-        <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-2 gap-8 border-b border-slate-100">
-          
-          {/* Было (Сложность) */}
-          <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/70">
-            <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <span>{current.problemTitle}</span>
-            </div>
-            <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
-              {current.problem}
-            </p>
-          </div>
-
-          {/* Стало (Решение) */}
-          <div className="p-5 rounded-2xl bg-sky-50/60 border border-sky-200">
-            <div className="text-xs font-bold text-sky-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-sky-600" />
-              <span>{current.solutionTitle}</span>
-            </div>
-            <p className="text-sm sm:text-base text-slate-800 leading-relaxed font-normal">
-              {current.solution}
-            </p>
-          </div>
-
-        </div>
-
-        {/* Метрики результата кейса */}
-        <div className="p-6 sm:p-8 bg-white">
-          <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
-            Зафиксированный финансовый и операционный эффект:
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {current.resultMetrics.map((m, idx) => (
-              <div key={idx} className="p-4 rounded-xl bg-slate-50 border border-slate-100">
-                <div className="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900 mb-1">
-                  {m.value}
+        {/* Сетка карточек конкретных сценариев */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredCases.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-sky-300 transition-all flex flex-col justify-between"
+            >
+              <div>
+                {/* Номер и бейдж отдела */}
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <span className="text-sky-600 font-extrabold text-xl tracking-wider font-mono">
+                    {item.number}
+                  </span>
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 border border-slate-200/60">
+                    {item.badge}
+                  </span>
                 </div>
-                <div className="text-xs font-bold text-slate-700 mb-0.5">
-                  {m.label}
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  {m.note}
-                </div>
+
+                {/* Заголовок действия */}
+                <h3 className="text-lg font-bold text-slate-900 mt-2 mb-2 leading-snug">
+                  {item.title}
+                </h3>
+
+                {/* Описание */}
+                <p className="text-sm text-slate-600 leading-relaxed mb-6">
+                  {item.description}
+                </p>
               </div>
-            ))}
-          </div>
+
+              {/* Статическая блок-схема процесса */}
+              <div className="mt-auto pt-4 border-t border-slate-100">
+                <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2.5">
+                  Схема процесса
+                </div>
+
+                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex flex-col gap-1.5">
+                  <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-xs">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 shrink-0">Вход</span>
+                    <span className="text-xs font-semibold text-slate-800 text-right">{item.flow.input}</span>
+                  </div>
+
+                  <div className="flex justify-center text-sky-500 py-0.5">
+                    <ArrowDown className="w-3.5 h-3.5" />
+                  </div>
+
+                  <div className="flex items-center justify-between gap-2 bg-sky-50 border border-sky-200 px-3 py-1.5 rounded-lg shadow-xs">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-sky-700 shrink-0">ИИ-агент</span>
+                    <span className="text-xs font-semibold text-sky-900 text-right">{item.flow.action}</span>
+                  </div>
+
+                  <div className="flex justify-center text-slate-400 py-0.5">
+                    <ArrowDown className="w-3.5 h-3.5" />
+                  </div>
+
+                  <div className="flex items-center justify-between gap-2 bg-slate-900 border border-slate-900 px-3 py-1.5 rounded-lg shadow-xs text-white">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-slate-300 shrink-0">Итог</span>
+                    <span className="text-xs font-semibold text-white text-right">{item.flow.output}</span>
+                  </div>
+                </div>
+
+                {item.demoLink && (
+                  <a
+                    href={item.demoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-xl bg-sky-50 border border-sky-200 text-xs font-bold text-sky-700 hover:bg-sky-100 hover:text-sky-800 transition-colors"
+                  >
+                    <span>Открыть живое демо подбора по фото</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>
-
     </section>
   );
 }

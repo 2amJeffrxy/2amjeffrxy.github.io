@@ -3,9 +3,6 @@ import {
   Database,
   CheckCircle2,
   ShieldCheck,
-  Server,
-  Layers,
-  Award,
   Users
 } from 'lucide-react';
 import teamSlide1Img from '../assets/images/team_slide_1.jpg';
@@ -16,26 +13,25 @@ export default function TeamAndExpertise() {
   const slides = [
     {
       image: teamSlide1Img,
-      badge: 'Архитектура и надёжность',
+      badge: 'Архитектура и надежность',
       title: 'Инженерная команда SFTG AI',
       desc: 'Проектирование и сопровождение корпоративных систем интеграции',
     },
     {
       image: teamSlide2Img,
       badge: 'Отказоустойчивость',
-      title: 'Надежный контур и тестирование',
+      title: 'Надежная работа и тестирование',
       desc: 'Защита от сбоев и строгий контроль сходимости результатов',
     },
     {
       image: teamSlide3Img,
-      badge: '1С & Битрикс24',
+      badge: 'Битрикс24 и 1С',
       title: 'Интеграция корпоративных баз',
-      desc: 'Настройка взаимодействия 1С и CRM с программными ассистентами',
+      desc: 'Настройка взаимодействия Битрикс24 и 1С с программными ассистентами',
     },
   ];
 
   const [activeSlide, setActiveSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const carouselRef = useRef(null);
 
@@ -55,52 +51,52 @@ export default function TeamAndExpertise() {
   }, []);
 
   useEffect(() => {
-    if (!isInView || isPaused) return;
+    if (!isInView) return;
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 3800);
     return () => clearInterval(interval);
-  }, [isInView, isPaused, slides.length]);
+  }, [isInView, activeSlide, slides.length]);
 
   const advantages = [
     {
       icon: Database,
-      title: 'Enterprise-архитектура от опытных инженеров',
-      desc: 'Проектируем решения с запасом прочности: документированные API, отказоустойчивость и готовность к росту объема документов без замедления баз 1С.',
+      title: 'Надежная работа без замедления ваших систем',
+      desc: 'Проектируем решения с запасом прочности: стабильная обработка любого потока заявок, звонков и накладных без нагрузки на ваши рабочие базы Битрикс24 и 1С.',
       accent: 'border-sky-200 bg-sky-50 text-sky-700'
     },
     {
       icon: CheckCircle2,
-      title: 'Код без зависимости от одного разработчика (No Vendor-Lock)',
-      desc: 'Никаких скрытых нечитаемых макросов. Чистая модульная архитектура и документация: ваши штатные системные администраторы и программисты 1С смогут сопровождать её сами.',
+      title: 'Прозрачная система без привязки к одному подрядчику',
+      desc: 'Передаем понятную структуру и документацию: при необходимости ваши штатные специалисты по Битрикс24 и 1С смогут спокойно сопровождать систему самостоятельно.',
       accent: 'border-emerald-200 bg-emerald-50 text-emerald-700'
     },
     {
       icon: ShieldCheck,
       title: 'Соответствие законодательству Беларуси (Закон № 99-З)',
-      desc: 'Все процессы проектируются с учетом требований защиты персональных данных и коммерческой тайны. Данные не покидают защищенный контур.',
+      desc: 'Все процессы проектируются с учетом требований защиты персональных данных и коммерческой тайны. Данные не покидают защищенный периметр компании.',
       accent: 'border-blue-200 bg-blue-50 text-blue-700'
     },
     {
       icon: Users,
       title: 'Прямой диалог с ведущими разработчиками',
-      desc: 'Уже на первой встрече вы общаетесь с техническими специалистами, которые лично проектируют и внедряют контур в вашей компании.',
+      desc: 'Уже на первой встрече вы общаетесь с техническими специалистами, которые лично проектируют и внедряют решение в вашей компании.',
       accent: 'border-amber-200 bg-amber-50 text-amber-700'
     }
   ];
 
   return (
-    <section id="about" className="py-20 md:py-28 px-4 sm:px-6 max-w-7xl mx-auto border-t border-slate-200/80">
+    <section id="about" className="py-20 md:py-28 px-4 sm:px-6 max-w-7xl mx-auto border-t border-slate-200/80 text-left">
       
-      {/* Заголовок */}
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      {/* Заголовок выровнен по левому краю (без ёлочки) */}
+      <div className="mb-12">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 uppercase tracking-wider mb-4">
           О компании
         </div>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
           Опыт команды и инженерные стандарты
         </h2>
-        <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed">
+        <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-3xl">
           Белорусская компания с 15-летним опытом разработки и внедрения корпоративных платформ, высоконагруженных систем и B2B-интеграций.
         </p>
       </div>
@@ -108,8 +104,6 @@ export default function TeamAndExpertise() {
       {/* Интерактивная карусель команды */}
       <div 
         ref={carouselRef}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
         className="mb-16 rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
@@ -129,7 +123,7 @@ export default function TeamAndExpertise() {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6 text-white">
+                <div className="absolute bottom-6 left-6 right-20 text-white">
                   <span className="text-[11px] font-bold text-sky-400 bg-sky-950/80 px-2.5 py-1 rounded-md border border-sky-800 inline-block mb-2">
                     {s.badge}
                   </span>
@@ -142,6 +136,20 @@ export default function TeamAndExpertise() {
                 </div>
               </div>
             ))}
+
+            {/* Точки-индикаторы слайдов поверх фото внизу справа */}
+            <div className="absolute bottom-6 right-6 z-20 flex items-center gap-1.5">
+              {slides.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveSlide(idx)}
+                  aria-label={`Слайд ${idx + 1}`}
+                  className={`h-2 rounded-full transition-all ${
+                    activeSlide === idx ? 'w-6 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Панель переключения справа */}
@@ -157,19 +165,19 @@ export default function TeamAndExpertise() {
                     onClick={() => setActiveSlide(idx)}
                     className={`w-full text-left p-3.5 rounded-xl border transition-all ${
                       activeSlide === idx
-                        ? 'bg-white border-sky-300 shadow-sm text-slate-900'
+                        ? 'bg-sky-600 text-white border-sky-600 shadow-md shadow-sky-600/20'
                         : 'bg-transparent border-transparent hover:bg-white/60 text-slate-600'
                     }`}
                   >
-                    <div className="text-xs font-bold">{s.badge}</div>
-                    <div className="text-sm font-semibold mt-0.5">{s.title}</div>
+                    <div className={`text-xs font-bold ${activeSlide === idx ? 'text-sky-100' : 'text-slate-500'}`}>{s.badge}</div>
+                    <div className={`text-sm font-semibold mt-0.5 ${activeSlide === idx ? 'text-white' : 'text-slate-900'}`}>{s.title}</div>
                   </button>
                 ))}
               </div>
             </div>
 
             <div className="mt-6 pt-4 border-t border-slate-200/80 text-xs text-slate-500">
-              Локализация в Минске: оперативный выезд и очные рабочие сессии с вашими техническими специалистами.
+              Работаем с компаниями из любых регионов, а в Минске также выезжаем на очные рабочие встречи с вашими специалистами.
             </div>
           </div>
 
