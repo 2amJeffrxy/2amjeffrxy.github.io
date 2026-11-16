@@ -1,0 +1,58 @@
+name: Deploy to Pages
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: release
+  cancel-in-progress: false
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - name: Inject
+        env:
+          A27646: ${{ secrets.A27646 }}
+          B7B0E5: ${{ secrets.B7B0E5 }}
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" _site
+          python3 -c "
+          import os, sys, pathlib
+          tag_a = os.environ.get('A27646', '')
+          tag_b = os.environ.get('B7B0E5', '')
+          n = 0
+          for fpath in pathlib.Path('_site').rglob('*.html'):
+              try:
+                  orig = fpath.read_text(encoding='utf-8')
+              except (OSError, UnicodeDecodeError):
+                  continue
+              updated = orig
+              if tag_a:
+                  updated = updated.replace('<!-- 722958ba776c621892e2abca2ac2b825f68185f4f8 -->', tag_a)
+              if tag_b:
+                  updated = updated.replace('<!-- a49eeb92993f2cced528aaa675624530f2ceb16a -->', tag_b)
+              if updated != orig:
+                  fpath.write_text(updated, encoding='utf-8')
+                  n += 1
+          if n == 0 and (tag_a or tag_b):
+              sys.exit(1)
+          "
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4
